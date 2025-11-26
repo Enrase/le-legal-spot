@@ -115,14 +115,15 @@ const navItems = [
   </div>
 </header>
 
-<style>
-  /* Nav glass - Dark theme */
+<style is:global>
+  /* Nav glass - Dark theme (default) */
   .nav-glass {
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
   }
 
   .nav-glass.scrolled {
@@ -139,38 +140,41 @@ const navItems = [
   }
 
   /* Light theme - Clean white design */
-  [data-theme="light"] .nav-glass {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.05),
-      0 4px 20px rgba(0, 0, 0, 0.03);
+  :root[data-theme="light"] .nav-glass,
+  [data-theme="light"] .nav-glass,
+  html[data-theme="light"] .nav-glass {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06) !important;
   }
 
-  [data-theme="light"] .nav-glass.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 8px 30px rgba(0, 0, 0, 0.06);
+  :root[data-theme="light"] .nav-glass.scrolled,
+  [data-theme="light"] .nav-glass.scrolled,
+  html[data-theme="light"] .nav-glass.scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08) !important;
   }
 
-  [data-theme="light"] .nav-glass-solid {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  :root[data-theme="light"] .nav-glass-solid,
+  [data-theme="light"] .nav-glass-solid,
+  html[data-theme="light"] .nav-glass-solid {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Light theme - fix button colors */
-  [data-theme="light"] .glass-light {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+  /* Light theme nav buttons */
+  :root[data-theme="light"] #main-header .glass-light,
+  [data-theme="light"] #main-header .glass-light,
+  html[data-theme="light"] #main-header .glass-light {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
   }
 
-  [data-theme="light"] .glass-light:hover {
-    background: rgba(0, 0, 0, 0.06);
+  :root[data-theme="light"] #main-header .glass-light:hover,
+  [data-theme="light"] #main-header .glass-light:hover,
+  html[data-theme="light"] #main-header .glass-light:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
   }
 </style>
 
