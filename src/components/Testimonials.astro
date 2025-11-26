@@ -1,0 +1,93 @@
+---
+const testimonials = [
+  {
+    quote: "Le Legal Spot comprend vraiment les enjeux tech. Ils ont structuré notre levée de fonds en un temps record, avec une vraie maîtrise des BSPCE et du pacte.",
+    author: "Marie D.",
+    role: "CEO, Startup IA - Série A",
+    avatar: "MD",
+    color: 'indigo',
+  },
+  {
+    quote: "Notre mise en conformité RGPD a été fluide et pragmatique. Pas de jargon inutile, des solutions concrètes adaptées à notre stack technique.",
+    author: "Thomas L.",
+    role: "CTO, SaaS B2B",
+    avatar: "TL",
+    color: 'purple',
+  },
+  {
+    quote: "Excellente anticipation de l'IA Act. Ils nous ont permis de prendre de l'avance sur nos concurrents en matière de compliance.",
+    author: "Sophie M.",
+    role: "Fondatrice, HealthTech",
+    avatar: "SM",
+    color: 'cyan',
+  },
+];
+
+const metrics = [
+  { value: '150+', label: 'Startups accompagnées' },
+  { value: '50M€+', label: 'Levées structurées' },
+  { value: '98%', label: 'Clients satisfaits' },
+  { value: '24h', label: 'Temps de réponse' },
+];
+---
+
+<section class="relative py-32 overflow-hidden">
+  <!-- Background orbs -->
+  <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[100px]"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+    <!-- Metrics Bar with premium glass -->
+    <div class="glass-premium rounded-3xl p-10 mb-20 glow-sm" data-animate>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {metrics.map((metric) => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">{metric.value}</div>
+            <div class="text-sm text-theme-muted">{metric.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+        <span class="w-2 h-2 bg-indigo-400 rounded-full"></span>
+        <span class="text-sm font-medium text-theme-secondary">Témoignages</span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-theme-primary">
+        Ce qu'ils disent de <span class="text-gradient">nous</span>
+      </h2>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonials.map((testimonial, index) => (
+        <div
+          class="glass rounded-2xl p-8 card-hover relative overflow-hidden"
+          data-animate
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          <!-- Quote Icon with glass -->
+          <div class="absolute -top-2 -left-2 w-12 h-12 glass rounded-full flex items-center justify-center text-2xl text-indigo-400/50 font-serif">"</div>
+
+          <p class="text-theme-secondary leading-relaxed mb-8 relative z-10 pt-4">
+            {testimonial.quote}
+          </p>
+
+          <div class="flex items-center gap-4">
+            <!-- Avatar with gradient -->
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-indigo-500/20">
+              {testimonial.avatar}
+            </div>
+
+            <div>
+              <div class="font-semibold text-theme-primary">{testimonial.author}</div>
+              <div class="text-sm text-theme-muted">{testimonial.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

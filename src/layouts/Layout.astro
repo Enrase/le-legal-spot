@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Le Legal Spot - Cabinet d'avocats Tech & IA pour entrepreneurs" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-[#020617] text-white antialiased">
+    <slot />
+
+    <script>
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      );
+
+      document.querySelectorAll('[data-animate]').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Header scroll effect
+      const header = document.querySelector('header');
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (header) {
+          if (currentScroll > 50) {
+            header.classList.add('glass', 'shadow-lg');
+          } else {
+            header.classList.remove('glass', 'shadow-lg');
+          }
+        }
+
+        lastScroll = currentScroll;
+      });
+    </script>
+  </body>
+</html>
