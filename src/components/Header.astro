@@ -7,21 +7,21 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="main-header">
-  <div class="max-w-7xl mx-auto px-6 py-4">
-    <nav class="glass-premium rounded-2xl px-6 py-3 flex items-center justify-between">
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4" id="header-inner">
+    <nav class="nav-glass rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-300" id="nav-bar">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-3 group">
         <img
           src="https://cdn.prod.website-files.com/625ec0b9b988873895f94bcc/685d3afb112864361a8f5b8e_Logo%20LegalSpot.svg"
           alt="Le Legal Spot"
-          class="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
+          class="h-8 sm:h-9 w-auto transition-transform duration-300 group-hover:scale-105"
           id="logo-img"
         />
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-8">
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8">
         {navItems.map((item) => (
           <a
             href={item.href}
@@ -34,18 +34,16 @@ const navItems = [
       </div>
 
       <!-- Right Side: Theme Toggle + CTA -->
-      <div class="hidden md:flex items-center gap-4">
+      <div class="hidden lg:flex items-center gap-3">
         <!-- Theme Toggle -->
         <button
           id="theme-toggle"
           class="theme-toggle glass-light rounded-xl"
           aria-label="Toggle theme"
         >
-          <!-- Sun icon (show in dark mode) -->
           <svg class="sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <!-- Moon icon (show in light mode) -->
           <svg class="moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
@@ -54,7 +52,7 @@ const navItems = [
         <!-- CTA Button -->
         <a
           href="#contact"
-          class="btn-primary px-6 py-2.5 rounded-full text-sm font-semibold text-white inline-flex items-center gap-2"
+          class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold text-white inline-flex items-center gap-2"
         >
           Prendre RDV
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,30 +61,31 @@ const navItems = [
         </a>
       </div>
 
-      <!-- Mobile: Theme Toggle + Menu Button -->
-      <div class="flex md:hidden items-center gap-2">
-        <!-- Mobile Theme Toggle -->
+      <!-- Mobile/Tablet: Theme Toggle + Menu Button -->
+      <div class="flex lg:hidden items-center gap-2">
         <button
           id="theme-toggle-mobile"
-          class="theme-toggle glass-light rounded-xl"
+          class="theme-toggle glass-light rounded-xl !w-10 !h-10"
           aria-label="Toggle theme"
         >
-          <svg class="sun-icon-mobile hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="sun-icon-mobile hidden !w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <svg class="moon-icon-mobile hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="moon-icon-mobile hidden !w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </button>
 
-        <!-- Mobile Menu Button -->
         <button
           id="mobile-menu-btn"
-          class="p-2 rounded-xl glass-light transition-colors"
+          class="p-2.5 rounded-xl glass-light transition-colors"
           aria-label="Menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -94,25 +93,79 @@ const navItems = [
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden mx-6 mt-2">
-    <div class="glass-premium rounded-2xl px-6 py-4 space-y-3">
+  <div id="mobile-menu" class="hidden lg:hidden mx-4 sm:mx-6 mt-2">
+    <div class="nav-glass-solid rounded-2xl px-6 py-4 space-y-1">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="block py-2 text-theme-secondary hover:text-theme-primary transition-colors"
+          class="block py-3 px-4 rounded-xl text-theme-secondary hover:text-theme-primary hover:bg-white/5 transition-all"
         >
           {item.label}
         </a>
       ))}
-      <a
-        href="#contact"
-        class="btn-primary block text-center px-6 py-3 rounded-full text-sm font-semibold text-white mt-4"
-      >
-        Prendre RDV
-      </a>
+      <div class="pt-4 mt-2 border-t border-white/10">
+        <a
+          href="#contact"
+          class="btn-primary block text-center px-6 py-3 rounded-full text-sm font-semibold text-white"
+        >
+          Prendre RDV
+        </a>
+      </div>
     </div>
   </div>
 </header>
+
+<style>
+  /* Nav glass - more opaque for better readability */
+  .nav-glass {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* When scrolled - even more opaque */
+  .nav-glass.scrolled {
+    background: rgba(15, 23, 42, 0.95);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Solid glass for mobile menu */
+  .nav-glass-solid {
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Light theme */
+  [data-theme="light"] .nav-glass {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow:
+      0 4px 30px rgba(99, 102, 241, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  [data-theme="light"] .nav-glass.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow:
+      0 8px 40px rgba(99, 102, 241, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  [data-theme="light"] .nav-glass-solid {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow: 0 10px 50px rgba(99, 102, 241, 0.15);
+  }
+</style>
 
 <script>
   // Theme management
@@ -166,34 +219,40 @@ const navItems = [
   // Mobile menu
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
 
   mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+    const isHidden = mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden', !isHidden);
+    closeIcon?.classList.toggle('hidden', isHidden);
   });
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
     });
   });
 
   // Header scroll effect
-  let lastScroll = 0;
-  const header = document.getElementById('main-header');
+  const navBar = document.getElementById('nav-bar');
+  const headerInner = document.getElementById('header-inner');
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    if (header) {
-      if (currentScroll > 100) {
-        header.classList.add('py-2');
-        header.classList.remove('py-4');
+    if (navBar && headerInner) {
+      if (currentScroll > 50) {
+        navBar.classList.add('scrolled');
+        headerInner.classList.add('pt-2');
+        headerInner.classList.remove('pt-4');
       } else {
-        header.classList.remove('py-2');
-        header.classList.add('py-4');
+        navBar.classList.remove('scrolled');
+        headerInner.classList.remove('pt-2');
+        headerInner.classList.add('pt-4');
       }
     }
-
-    lastScroll = currentScroll;
-  });
+  }, { passive: true });
 </script>
