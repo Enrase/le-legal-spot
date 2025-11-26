@@ -1,31 +1,35 @@
 ---
 const expertises = [
   {
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
     </svg>`,
     title: 'RGPD & Conformité',
     description: 'Audit, mise en conformité et DPO externalisé. Protection des données adaptée à votre stack technique.',
-    tags: ['Audit RGPD', 'DPO externalisé', 'Privacy by design'],
+    tags: ['Audit RGPD', 'DPO', 'Privacy by design'],
     color: 'indigo',
+    size: 'bento-lg', // Large card
+    featured: true,
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
     </svg>`,
-    title: 'IA Act & Réglementation',
-    description: 'Anticipez le cadre réglementaire européen sur l\'IA. Classification des risques et obligations de conformité.',
-    tags: ['Classification IA', 'High-risk systems', 'Documentation'],
+    title: 'IA Act',
+    description: 'Anticipez le cadre réglementaire européen.',
+    tags: ['Classification', 'High-risk'],
     color: 'purple',
+    size: 'normal',
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
     </svg>`,
-    title: 'Contrats Tech & SaaS',
-    description: 'CGV, CGU, contrats de licence, SLA, NDA. Des contrats solides qui protègent vraiment votre business.',
-    tags: ['CGV/CGU', 'Licence SaaS', 'SLA', 'NDA'],
+    title: 'Contrats Tech',
+    description: 'CGV, CGU, SLA, NDA. Des contrats solides.',
+    tags: ['SaaS', 'Licence'],
     color: 'cyan',
+    size: 'normal',
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,47 +37,50 @@ const expertises = [
     </svg>`,
     title: 'Propriété Intellectuelle',
     description: 'Protection de vos algorithmes, marques et innovations. Stratégie IP adaptée aux startups tech.',
-    tags: ['Brevets', 'Marques', 'Copyright', 'Trade secrets'],
+    tags: ['Brevets', 'Marques', 'Trade secrets'],
     color: 'pink',
+    size: 'bento-wide',
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
     </svg>`,
-    title: 'Levée de Fonds & M&A',
-    description: 'Due diligence juridique, pacte d\'actionnaires, BSPCE. On structure vos opérations de croissance.',
-    tags: ['Due diligence', 'Pacte d\'actionnaires', 'BSPCE'],
+    title: 'Levée de Fonds',
+    description: 'Due diligence, pacte d\'actionnaires, BSPCE.',
+    tags: ['M&A', 'BSPCE'],
     color: 'emerald',
+    size: 'normal',
   },
   {
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
     </svg>`,
-    title: 'International & Export',
-    description: 'Structuration internationale, transferts de données hors UE, contrats cross-border.',
-    tags: ['Export controls', 'Data transfer', 'Multi-juridictions'],
+    title: 'International',
+    description: 'Transferts de données, contrats cross-border.',
+    tags: ['Export', 'Multi-juridictions'],
     color: 'amber',
+    size: 'normal',
   },
 ];
 
-const colorClasses: Record<string, { bg: string; text: string; border: string }> = {
-  indigo: { bg: 'from-indigo-500/20 to-indigo-600/10', text: 'text-indigo-400', border: 'border-indigo-500/20' },
-  purple: { bg: 'from-purple-500/20 to-purple-600/10', text: 'text-purple-400', border: 'border-purple-500/20' },
-  cyan: { bg: 'from-cyan-500/20 to-cyan-600/10', text: 'text-cyan-400', border: 'border-cyan-500/20' },
-  pink: { bg: 'from-pink-500/20 to-pink-600/10', text: 'text-pink-400', border: 'border-pink-500/20' },
-  emerald: { bg: 'from-emerald-500/20 to-emerald-600/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
-  amber: { bg: 'from-amber-500/20 to-amber-600/10', text: 'text-amber-400', border: 'border-amber-500/20' },
+const colorClasses: Record<string, { bg: string; text: string; glow: string }> = {
+  indigo: { bg: 'from-indigo-500/20 to-indigo-600/5', text: 'text-indigo-400', glow: 'shadow-indigo-500/20' },
+  purple: { bg: 'from-purple-500/20 to-purple-600/5', text: 'text-purple-400', glow: 'shadow-purple-500/20' },
+  cyan: { bg: 'from-cyan-500/20 to-cyan-600/5', text: 'text-cyan-400', glow: 'shadow-cyan-500/20' },
+  pink: { bg: 'from-pink-500/20 to-pink-600/5', text: 'text-pink-400', glow: 'shadow-pink-500/20' },
+  emerald: { bg: 'from-emerald-500/20 to-emerald-600/5', text: 'text-emerald-400', glow: 'shadow-emerald-500/20' },
+  amber: { bg: 'from-amber-500/20 to-amber-600/5', text: 'text-amber-400', glow: 'shadow-amber-500/20' },
 };
 ---
 
 <section id="expertise" class="relative py-32 overflow-hidden">
-  <!-- Background orbs for glassmorphism -->
+  <!-- Background orbs -->
   <div class="absolute top-20 left-1/4 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
   <div class="absolute bottom-20 right-1/4 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[100px]"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6">
     <!-- Section Header -->
-    <div class="text-center mb-20" data-animate>
+    <div class="text-center mb-16" data-animate>
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
         <span class="w-2 h-2 bg-indigo-400 rounded-full"></span>
         <span class="text-sm font-medium text-theme-secondary">Nos Expertises</span>
@@ -86,42 +93,88 @@ const colorClasses: Record<string, { bg: string; text: string; border: string }>
       </p>
     </div>
 
-    <!-- Expertise Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Bento Grid -->
+    <div class="bento-grid" data-animate>
       {expertises.map((expertise, index) => (
         <div
-          class="group glass rounded-2xl p-8 card-hover relative overflow-hidden"
-          data-animate
+          class={`bento-item ${expertise.size} tilt-card group`}
+          data-tilt
           style={`animation-delay: ${index * 100}ms`}
         >
-          <!-- Subtle gradient overlay on hover -->
-          <div class={`absolute inset-0 bg-gradient-to-br ${colorClasses[expertise.color].bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+          <div class={`tilt-card-inner glass spotlight h-full p-8 flex flex-col ${expertise.featured ? 'justify-between' : 'justify-start'}`}>
+            <!-- Shine effect -->
+            <div class="tilt-shine"></div>
 
-          <div class="relative z-10">
-            <!-- Icon -->
-            <div class={`w-14 h-14 rounded-xl glass flex items-center justify-center mb-6 ${colorClasses[expertise.color].text} group-hover:scale-110 group-hover:glow-sm transition-all duration-300`}>
-              <Fragment set:html={expertise.icon} />
+            <!-- Gradient overlay on hover -->
+            <div class={`absolute inset-0 bg-gradient-to-br ${colorClasses[expertise.color].bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]`}></div>
+
+            <div class="relative z-10">
+              <!-- Icon with animated border -->
+              <div class={`w-16 h-16 rounded-2xl glass flex items-center justify-center mb-6 ${colorClasses[expertise.color].text} group-hover:scale-110 transition-all duration-300 ${expertise.featured ? 'animated-border' : ''}`}>
+                <Fragment set:html={expertise.icon} />
+              </div>
+
+              <!-- Content -->
+              <h3 class={`font-bold mb-3 text-theme-primary group-hover:text-gradient transition-all duration-300 ${expertise.featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                {expertise.title}
+              </h3>
+              <p class={`text-theme-secondary leading-relaxed ${expertise.featured ? 'text-lg mb-8' : 'mb-4 text-sm'}`}>
+                {expertise.description}
+              </p>
             </div>
 
-            <!-- Content -->
-            <h3 class="text-xl font-bold mb-3 text-theme-primary group-hover:text-gradient transition-all duration-300">
-              {expertise.title}
-            </h3>
-            <p class="text-theme-secondary mb-6 leading-relaxed">
-              {expertise.description}
-            </p>
-
             <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
+            <div class="relative z-10 flex flex-wrap gap-2 mt-auto">
               {expertise.tags.map((tag) => (
-                <span class={`text-xs px-3 py-1.5 rounded-full glass text-theme-muted ${colorClasses[expertise.color].border} border`}>
+                <span class={`text-xs px-3 py-1.5 rounded-full glass text-theme-muted`}>
                   {tag}
                 </span>
               ))}
             </div>
+
+            {/* Featured card CTA */}
+            {expertise.featured && (
+              <a href="#contact" class="relative z-10 mt-6 inline-flex items-center gap-2 text-indigo-400 font-medium group/link">
+                En savoir plus
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            )}
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  // 3D Tilt Effect
+  document.querySelectorAll('[data-tilt]').forEach((card) => {
+    const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
+    if (!inner) return;
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = (card as HTMLElement).getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+
+      inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+
+      // Update spotlight position
+      const spotlight = card as HTMLElement;
+      spotlight.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      spotlight.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      inner.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
+</script>

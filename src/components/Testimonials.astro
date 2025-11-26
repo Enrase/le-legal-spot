@@ -5,29 +5,29 @@ const testimonials = [
     author: "Marie D.",
     role: "CEO, Startup IA - Série A",
     avatar: "MD",
-    color: 'indigo',
+    color: 'from-indigo-500 to-purple-500',
   },
   {
     quote: "Notre mise en conformité RGPD a été fluide et pragmatique. Pas de jargon inutile, des solutions concrètes adaptées à notre stack technique.",
     author: "Thomas L.",
     role: "CTO, SaaS B2B",
     avatar: "TL",
-    color: 'purple',
+    color: 'from-purple-500 to-pink-500',
   },
   {
     quote: "Excellente anticipation de l'IA Act. Ils nous ont permis de prendre de l'avance sur nos concurrents en matière de compliance.",
     author: "Sophie M.",
     role: "Fondatrice, HealthTech",
     avatar: "SM",
-    color: 'cyan',
+    color: 'from-cyan-500 to-blue-500',
   },
 ];
 
 const metrics = [
-  { value: '150+', label: 'Startups accompagnées' },
-  { value: '50M€+', label: 'Levées structurées' },
-  { value: '98%', label: 'Clients satisfaits' },
-  { value: '24h', label: 'Temps de réponse' },
+  { value: 150, suffix: '+', label: 'Startups accompagnées' },
+  { value: 50, suffix: 'M€+', label: 'Levées structurées' },
+  { value: 98, suffix: '%', label: 'Clients satisfaits' },
+  { value: 24, suffix: 'h', label: 'Temps de réponse' },
 ];
 ---
 
@@ -37,13 +37,19 @@ const metrics = [
   <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[100px]"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6">
-    <!-- Metrics Bar with premium glass -->
+    <!-- Metrics Bar with animated counters -->
     <div class="glass-premium rounded-3xl p-10 mb-20 glow-sm" data-animate>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         {metrics.map((metric) => (
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">{metric.value}</div>
-            <div class="text-sm text-theme-muted">{metric.label}</div>
+          <div class="text-center group">
+            <div class="text-4xl md:text-5xl font-bold text-gradient mb-2">
+              <span
+                class="counter"
+                data-target={metric.value}
+                data-suffix={metric.suffix}
+              >0</span>{metric.suffix}
+            </div>
+            <div class="text-sm text-theme-muted group-hover:text-theme-secondary transition-colors">{metric.label}</div>
           </div>
         ))}
       </div>
@@ -60,30 +66,38 @@ const metrics = [
       </h2>
     </div>
 
-    <!-- Testimonials Grid -->
+    <!-- Testimonials Grid with tilt -->
     <div class="grid md:grid-cols-3 gap-6">
       {testimonials.map((testimonial, index) => (
         <div
-          class="glass rounded-2xl p-8 card-hover relative overflow-hidden"
+          class="tilt-card group"
+          data-tilt
           data-animate
           style={`animation-delay: ${index * 100}ms`}
         >
-          <!-- Quote Icon with glass -->
-          <div class="absolute -top-2 -left-2 w-12 h-12 glass rounded-full flex items-center justify-center text-2xl text-indigo-400/50 font-serif">"</div>
+          <div class="tilt-card-inner glass spotlight rounded-2xl p-8 h-full flex flex-col">
+            <!-- Shine effect -->
+            <div class="tilt-shine"></div>
 
-          <p class="text-theme-secondary leading-relaxed mb-8 relative z-10 pt-4">
-            {testimonial.quote}
-          </p>
-
-          <div class="flex items-center gap-4">
-            <!-- Avatar with gradient -->
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-indigo-500/20">
-              {testimonial.avatar}
+            <!-- Quote Icon with gradient -->
+            <div class={`absolute -top-4 -left-4 w-16 h-16 rounded-2xl bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-3xl text-white font-serif shadow-lg`}>
+              "
             </div>
 
-            <div>
-              <div class="font-semibold text-theme-primary">{testimonial.author}</div>
-              <div class="text-sm text-theme-muted">{testimonial.role}</div>
+            <p class="text-theme-secondary leading-relaxed mb-8 relative z-10 pt-8">
+              {testimonial.quote}
+            </p>
+
+            <div class="flex items-center gap-4 mt-auto relative z-10">
+              <!-- Avatar with gradient -->
+              <div class={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-sm font-bold text-white shadow-lg`}>
+                {testimonial.avatar}
+              </div>
+
+              <div>
+                <div class="font-semibold text-theme-primary">{testimonial.author}</div>
+                <div class="text-sm text-theme-muted">{testimonial.role}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,3 +105,74 @@ const metrics = [
     </div>
   </div>
 </section>
+
+<script>
+  // Animated Counter
+  const counters = document.querySelectorAll('.counter');
+
+  const animateCounter = (counter: Element) => {
+    const target = parseInt(counter.getAttribute('data-target') || '0');
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current).toString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target.toString();
+      }
+    };
+
+    updateCounter();
+  };
+
+  // Intersection Observer for counters
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          animateCounter(counter);
+          counterObserver.unobserve(counter);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach((counter) => {
+    counterObserver.observe(counter);
+  });
+
+  // 3D Tilt Effect for testimonials
+  document.querySelectorAll('[data-tilt]').forEach((card) => {
+    const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
+    if (!inner) return;
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = (card as HTMLElement).getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (y - centerY) / 25;
+      const rotateY = (centerX - x) / 25;
+
+      inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+
+      // Update spotlight
+      const spotlight = card as HTMLElement;
+      spotlight.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      spotlight.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      inner.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
+</script>

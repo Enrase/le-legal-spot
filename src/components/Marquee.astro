@@ -1,0 +1,48 @@
+---
+interface Props {
+  reverse?: boolean;
+  speed?: 'slow' | 'normal' | 'fast';
+}
+
+const { reverse = false, speed = 'normal' } = Astro.props;
+
+const speedClass = {
+  slow: 'animate-[marquee_40s_linear_infinite]',
+  normal: 'animate-[marquee_30s_linear_infinite]',
+  fast: 'animate-[marquee_20s_linear_infinite]',
+};
+
+const clients = [
+  { name: 'TechVenture', color: 'indigo' },
+  { name: 'AI Startup', color: 'purple' },
+  { name: 'FinTech Pro', color: 'cyan' },
+  { name: 'SaaS Studio', color: 'pink' },
+  { name: 'DeepMind Labs', color: 'emerald' },
+  { name: 'Cloud Nine', color: 'amber' },
+  { name: 'DataFlow', color: 'indigo' },
+  { name: 'NeuraTech', color: 'purple' },
+  { name: 'CryptoSafe', color: 'cyan' },
+  { name: 'AutoScale', color: 'pink' },
+];
+
+const colorMap: Record<string, string> = {
+  indigo: 'bg-indigo-500',
+  purple: 'bg-purple-500',
+  cyan: 'bg-cyan-500',
+  pink: 'bg-pink-500',
+  emerald: 'bg-emerald-500',
+  amber: 'bg-amber-500',
+};
+---
+
+<div class="marquee-container py-4">
+  <div class={`flex gap-8 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'}`} style={`animation-duration: ${speed === 'slow' ? '40s' : speed === 'fast' ? '20s' : '30s'}`}>
+    {/* Double the items for seamless loop */}
+    {[...clients, ...clients].map((client) => (
+      <div class="flex items-center gap-3 px-6 py-3 glass rounded-xl whitespace-nowrap group hover:glow-sm transition-all duration-300">
+        <div class={`w-3 h-3 rounded-full ${colorMap[client.color]} group-hover:scale-125 transition-transform`}></div>
+        <span class="text-sm font-medium text-theme-secondary group-hover:text-theme-primary transition-colors">{client.name}</span>
+      </div>
+    ))}
+  </div>
+</div>

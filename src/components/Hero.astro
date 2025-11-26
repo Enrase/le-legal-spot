@@ -1,7 +1,11 @@
 ---
+import Marquee from './Marquee.astro';
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <!-- Cursor Glow Effect -->
+  <div id="cursor-glow" class="cursor-glow hidden lg:block"></div>
+
   <!-- Background Effects -->
   <div class="absolute inset-0 bg-mesh opacity-70"></div>
   <div class="absolute inset-0 bg-grid"></div>
@@ -13,9 +17,21 @@
   <div class="absolute bottom-1/3 left-1/3 w-[250px] h-[250px] bg-pink-500/10 rounded-full blur-[80px] animate-float" style="animation-delay: 3s;"></div>
 
   <!-- Floating glass elements for depth -->
-  <div class="absolute top-32 right-20 w-20 h-20 glass-light rounded-2xl rotate-12 animate-float opacity-40 hidden lg:block"></div>
-  <div class="absolute bottom-40 left-16 w-16 h-16 glass-light rounded-xl -rotate-6 animate-float opacity-30 hidden lg:block" style="animation-delay: 1s;"></div>
-  <div class="absolute top-1/2 right-10 w-12 h-12 glass-light rounded-lg rotate-45 animate-float opacity-20 hidden lg:block" style="animation-delay: 2s;"></div>
+  <div class="absolute top-32 right-20 w-24 h-24 glass rounded-2xl rotate-12 animate-float-slow opacity-40 hidden lg:flex items-center justify-center">
+    <svg class="w-10 h-10 text-indigo-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+    </svg>
+  </div>
+  <div class="absolute bottom-40 left-16 w-20 h-20 glass rounded-xl -rotate-6 animate-float-reverse opacity-30 hidden lg:flex items-center justify-center" style="animation-delay: 1s;">
+    <svg class="w-8 h-8 text-purple-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3" />
+    </svg>
+  </div>
+  <div class="absolute top-1/2 right-10 w-16 h-16 glass rounded-lg rotate-45 animate-float opacity-20 hidden lg:flex items-center justify-center" style="animation-delay: 2s;">
+    <svg class="w-6 h-6 text-cyan-400/50 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+    </svg>
+  </div>
 
   <!-- Content -->
   <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -28,10 +44,10 @@
       <span class="text-sm font-medium text-theme-secondary">Cabinet spécialisé Tech & IA</span>
     </div>
 
-    <!-- Main Headline -->
+    <!-- Main Headline with animated gradient -->
     <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mt-8 mb-6 animate-fade-in-up delay-100">
       <span class="block text-theme-primary">Le droit</span>
-      <span class="text-gradient">à l'ère de l'IA</span>
+      <span class="text-gradient animate-gradient">à l'ère de l'IA</span>
     </h1>
 
     <!-- Subheadline -->
@@ -40,11 +56,12 @@
       <span class="text-theme-primary font-medium">RGPD, IA Act, Propriété Intellectuelle, Contrats SaaS</span> — nous parlons votre langage.
     </p>
 
-    <!-- CTA Buttons with enhanced glass -->
+    <!-- CTA Buttons with magnetic effect -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
       <a
         href="#contact"
-        class="btn-primary px-8 py-4 rounded-2xl text-lg font-semibold text-white inline-flex items-center gap-3 glow-intense"
+        class="magnetic-btn btn-primary px-8 py-4 rounded-2xl text-lg font-semibold text-white inline-flex items-center gap-3 glow-intense"
+        data-magnetic
       >
         Réserver une consultation
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,37 +70,18 @@
       </a>
       <a
         href="#expertise"
-        class="btn-secondary px-8 py-4 rounded-2xl text-lg font-semibold text-theme-primary inline-flex items-center gap-3"
+        class="magnetic-btn btn-secondary px-8 py-4 rounded-2xl text-lg font-semibold text-theme-primary inline-flex items-center gap-3"
+        data-magnetic
       >
         Découvrir nos expertises
       </a>
     </div>
 
-    <!-- Trust Indicators with glass cards -->
-    <div class="mt-24 animate-fade-in-up delay-400">
-      <p class="text-sm text-theme-muted mb-8 uppercase tracking-wider font-medium">Ils nous font confiance</p>
-      <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-        <div class="glass px-6 py-3 rounded-xl text-sm font-medium text-theme-secondary flex items-center gap-2 hover:glow-sm transition-all duration-300">
-          <div class="w-2 h-2 rounded-full bg-indigo-400"></div>
-          STARTUP IA
-        </div>
-        <div class="glass px-6 py-3 rounded-xl text-sm font-medium text-theme-secondary flex items-center gap-2 hover:glow-sm transition-all duration-300">
-          <div class="w-2 h-2 rounded-full bg-purple-400"></div>
-          FINTECH CO
-        </div>
-        <div class="glass px-6 py-3 rounded-xl text-sm font-medium text-theme-secondary flex items-center gap-2 hover:glow-sm transition-all duration-300">
-          <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
-          SAAS STUDIO
-        </div>
-        <div class="glass px-6 py-3 rounded-xl text-sm font-medium text-theme-secondary flex items-center gap-2 hover:glow-sm transition-all duration-300">
-          <div class="w-2 h-2 rounded-full bg-pink-400"></div>
-          DEEP TECH
-        </div>
-        <div class="glass px-6 py-3 rounded-xl text-sm font-medium text-theme-secondary flex items-center gap-2 hover:glow-sm transition-all duration-300">
-          <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
-          AI LABS
-        </div>
-      </div>
+    <!-- Trust Indicators - Marquee -->
+    <div class="mt-20 animate-fade-in-up delay-400">
+      <p class="text-sm text-theme-muted mb-6 uppercase tracking-wider font-medium">Ils nous font confiance</p>
+      <Marquee />
+      <Marquee reverse={true} speed="slow" />
     </div>
   </div>
 
@@ -97,3 +95,50 @@
   <!-- Bottom gradient fade -->
   <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--bg-primary)] to-transparent"></div>
 </section>
+
+<script>
+  // Cursor Glow Effect
+  const cursorGlow = document.getElementById('cursor-glow');
+
+  if (cursorGlow && window.innerWidth >= 1024) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      const dx = mouseX - currentX;
+      const dy = mouseY - currentY;
+
+      currentX += dx * 0.1;
+      currentY += dy * 0.1;
+
+      cursorGlow.style.left = `${currentX}px`;
+      cursorGlow.style.top = `${currentY}px`;
+
+      requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+  }
+
+  // Magnetic Button Effect
+  document.querySelectorAll('[data-magnetic]').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = (e.target as HTMLElement).getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      (e.target as HTMLElement).style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+
+    btn.addEventListener('mouseleave', (e) => {
+      (e.target as HTMLElement).style.transform = 'translate(0, 0)';
+    });
+  });
+</script>
