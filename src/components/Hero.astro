@@ -97,48 +97,80 @@ import Marquee from './Marquee.astro';
 </section>
 
 <script>
-  // Cursor Glow Effect
+  // Optimized Cursor Glow Effect using transform (GPU accelerated)
   const cursorGlow = document.getElementById('cursor-glow');
 
   if (cursorGlow && window.innerWidth >= 1024) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+    let rafId: number;
+
+    // Smoother easing factor
+    const ease = 0.08;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-    });
+    }, { passive: true });
 
     function animateCursor() {
-      const dx = mouseX - currentX;
-      const dy = mouseY - currentY;
+      // Smooth interpolation
+      currentX += (mouseX - currentX) * ease;
+      currentY += (mouseY - currentY) * ease;
 
-      currentX += dx * 0.1;
-      currentY += dy * 0.1;
+      // Use transform instead of left/top for GPU acceleration
+      cursorGlow.style.transform = `translate3d(${currentX - 250}px, ${currentY - 250}px, 0)`;
 
-      cursorGlow.style.left = `${currentX}px`;
-      cursorGlow.style.top = `${currentY}px`;
-
-      requestAnimationFrame(animateCursor);
+      rafId = requestAnimationFrame(animateCursor);
     }
 
     animateCursor();
+
+    // Cleanup on page hide
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        animateCursor();
+      }
+    });
   }
 
-  // Magnetic Button Effect
+  // Optimized Magnetic Button Effect
   document.querySelectorAll('[data-magnetic]').forEach((btn) => {
+    let rafId: number;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.15;
+      currentY += (targetY - currentY) * 0.15;
+
+      (btn as HTMLElement).style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+      if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+
     btn.addEventListener('mousemove', (e) => {
-      const rect = (e.target as HTMLElement).getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+      const rect = (btn as HTMLElement).getBoundingClientRect();
+      targetX = (e.clientX - rect.left - rect.width / 2) * 0.15;
+      targetY = (e.clientY - rect.top - rect.height / 2) * 0.15;
 
-      (e.target as HTMLElement).style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-    });
+      cancelAnimationFrame(rafId);
+      animate();
+    }, { passive: true });
 
-    btn.addEventListener('mouseleave', (e) => {
-      (e.target as HTMLElement).style.transform = 'translate(0, 0)';
+    btn.addEventListener('mouseleave', () => {
+      targetX = 0;
+      targetY = 0;
+      cancelAnimationFrame(rafId);
+      animate();
     });
   });
 </script>

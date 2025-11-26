@@ -149,10 +149,36 @@ const colorClasses: Record<string, { bg: string; text: string; glow: string }> =
 </section>
 
 <script>
-  // 3D Tilt Effect
+  // Optimized 3D Tilt Effect with smooth interpolation
   document.querySelectorAll('[data-tilt]').forEach((card) => {
     const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
     if (!inner) return;
+
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+    let rafId: number;
+    let isHovering = false;
+
+    const ease = 0.1;
+
+    const animate = () => {
+      currentRotateX += (targetRotateX - currentRotateX) * ease;
+      currentRotateY += (targetRotateY - currentRotateY) * ease;
+
+      inner.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translateZ(5px)`;
+
+      if (isHovering || Math.abs(targetRotateX - currentRotateX) > 0.01 || Math.abs(targetRotateY - currentRotateY) > 0.01) {
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+
+    card.addEventListener('mouseenter', () => {
+      isHovering = true;
+      cancelAnimationFrame(rafId);
+      animate();
+    });
 
     card.addEventListener('mousemove', (e) => {
       const rect = (card as HTMLElement).getBoundingClientRect();
@@ -162,19 +188,19 @@ const colorClasses: Record<string, { bg: string; text: string; glow: string }> =
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-
-      inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      // Reduced rotation for subtler effect
+      targetRotateX = (y - centerY) / 30;
+      targetRotateY = (centerX - x) / 30;
 
       // Update spotlight position
-      const spotlight = card as HTMLElement;
-      spotlight.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-      spotlight.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-    });
+      (card as HTMLElement).style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      (card as HTMLElement).style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+    }, { passive: true });
 
     card.addEventListener('mouseleave', () => {
-      inner.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      isHovering = false;
+      targetRotateX = 0;
+      targetRotateY = 0;
     });
   });
 </script>
